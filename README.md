@@ -2,7 +2,7 @@
 
 Vietnamese guide: `README_VI.md`
 
-Hide Discord web messages using zero-width encoding with optional shared-key encryption. Includes a browser extension and a Tampermonkey userscript.
+Hide Discord web messages using zero-width encoding with optional shared-key encryption. Includes a browser extension and a Tampermonkey userscript. Use only one at a time (extension or userscript), not both together.
 
 https://github.com/user-attachments/assets/49a7efea-7cc7-4a5f-96da-1058e9e48831
 
