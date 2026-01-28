@@ -4,6 +4,8 @@ Vietnamese guide: `README_VI.md`
 
 Hide Discord web messages using zero-width encoding with optional shared-key encryption. Includes a browser extension and a Tampermonkey userscript.
 
+https://github.com/user-attachments/assets/49a7efea-7cc7-4a5f-96da-1058e9e48831
+
 ## Features
 - Invisible zero-width encoding for message content with auto-decode for users who have this tool.
 - Mention preservation for user, role, and channel pings, including `@everyone` and `@here`.
