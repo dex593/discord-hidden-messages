@@ -46,9 +46,8 @@ Supported attachment file extensions: `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, 
 ## Project Structure
 - `discord-invisible-extension`: Chrome/Edge extension source.
 - `discord-invisible.user.js`: Tampermonkey userscript.
-- `INSTALL.md`: English installation guide.
-- `install_vi.md`: Vietnamese installation guide.
 
 ## Notes
-- This tool modifies Discord web requests and rendering; Discord updates can break behavior.
+- This tool is for educational and research purposes only.
+- Disclaimer: Use at your own risk. You are responsible for compliance with applicable laws and platform terms.
 - Only the listed attachment types are supported for encryption/decryption.
