@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="panel">
+      <div class="header">
+        <div class="title">Hide Discord Messages</div>
+        <div class="subtitle">Only users with the extension can read them.</div>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-text">
+          <div class="label">Enable encryption</div>
+          <div class="hint" id="status">Enabled</div>
+        </div>
+        <label class="switch" aria-label="Toggle encryption">
+          <input id="toggle" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="shared-key">Shared key</label>
+        <input id="shared-key" class="field-input" type="text" autocomplete="off" spellcheck="false" />
+        <div class="field-hint">Use the same key to read messages.</div>
+      </div>
+
+      <div class="note">You may need to reload Discord after changing the setting.</div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
