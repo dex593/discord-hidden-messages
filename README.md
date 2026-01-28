@@ -1,5 +1,7 @@
 # Discord Hidden Messages
 
+Vietnamese guide: `README_VI.md`
+
 Hide Discord web messages using zero-width encoding with optional shared-key encryption. Includes a browser extension and a Tampermonkey userscript.
 
 ## Features
