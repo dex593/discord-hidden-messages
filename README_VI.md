@@ -4,6 +4,8 @@ Hướng dẫn tiếng Anh: `README.md`
 
 Repo này có hai cách sử dụng trên Discord web: một tiện ích trình duyệt và một Tampermonkey userscript. Có thể dùng một hoặc cả hai, nhưng cần giữ chung khóa dùng chung.
 
+https://github.com/user-attachments/assets/49a7efea-7cc7-4a5f-96da-1058e9e48831
+
 ## Tính năng
 - Mã hóa tin nhắn bằng ký tự zero-width và tự động giải mã cho người có công cụ.
 - Giữ mention người dùng, role, kênh, và hỗ trợ `@everyone`, `@here`.
