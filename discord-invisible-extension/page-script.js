@@ -163,7 +163,6 @@
   const KEY_ITERATIONS = 100000;
   const META_PREFIX = "M1";
   const META_SEPARATOR = "\u0000";
-  const TEXT_ENCRYPT_PREFIX = "E1";
   const TEXT_ENCRYPT_PREFIX_V2_BYTE = 0xff;
   const TEXT_ENCRYPT_MAGIC = "DT1:";
   const TEXT_IV_BYTES = 12;
@@ -413,10 +412,6 @@
         offset += g;
       }
       return bytes;
-    }
-
-    function decodeBytes(payload) {
-      return decoder.decode(decodePayloadBytes(payload));
     }
 
     function decodeBytesFromContent(content) {
@@ -964,46 +959,6 @@
     return plainBytes;
   }
 
-  function buildEncryptedTextPayload(plainText) {
-    const keyState = getTextKeyState();
-    if (!keyState) return null;
-    const iv = crypto.getRandomValues(new Uint8Array(TEXT_IV_BYTES));
-    const plainBytes = HEADER_ENCODER.encode(TEXT_ENCRYPT_MAGIC + plainText);
-    const encrypted = aesGcmEncrypt(plainBytes, keyState, iv);
-    if (!encrypted) return null;
-    const combined = new Uint8Array(encrypted.cipher.length + encrypted.tag.length);
-    combined.set(encrypted.cipher, 0);
-    combined.set(encrypted.tag, encrypted.cipher.length);
-    return TEXT_ENCRYPT_PREFIX + META_SEPARATOR + base64EncodeBytes(iv) + META_SEPARATOR + base64EncodeBytes(combined);
-  }
-
-  function parseEncryptedTextPayload(body) {
-    if (!body) return null;
-    const prefix = TEXT_ENCRYPT_PREFIX + META_SEPARATOR;
-    if (body.indexOf(prefix) !== 0) return null;
-    const rest = body.slice(prefix.length);
-    const sepIndex = rest.indexOf(META_SEPARATOR);
-    if (sepIndex === -1) return null;
-    const ivText = rest.slice(0, sepIndex);
-    const cipherText = rest.slice(sepIndex + META_SEPARATOR.length);
-    if (!ivText || !cipherText) return null;
-    return { ivText: ivText, cipherText: cipherText };
-  }
-
-  function decryptEncryptedTextPayload(parsed) {
-    const keyState = getTextKeyState();
-    if (!keyState) return null;
-    const ivBytes = base64DecodeBytes(parsed.ivText);
-    const cipherBytes = base64DecodeBytes(parsed.cipherText);
-    if (!ivBytes || !cipherBytes) return null;
-    if (ivBytes.length !== TEXT_IV_BYTES) return null;
-    const plainBytes = aesGcmDecrypt(cipherBytes, keyState, ivBytes);
-    if (!plainBytes) return null;
-    const text = HEADER_DECODER.decode(plainBytes);
-    if (text.indexOf(TEXT_ENCRYPT_MAGIC) !== 0) return null;
-    return text.slice(TEXT_ENCRYPT_MAGIC.length);
-  }
-
   function buildEncryptedTextPayloadBinary(plainText) {
     const keyState = getTextKeyState();
     if (!keyState) return null;
@@ -1150,11 +1105,7 @@
   }
 
   function decodePayloadText(body) {
-    const encrypted = parseEncryptedTextPayload(body);
-    if (!encrypted) return parseMetaPayload(body);
-    const decrypted = decryptEncryptedTextPayload(encrypted);
-    if (decrypted === null) return null;
-    return parseMetaPayload(decrypted);
+    return parseMetaPayload(body);
   }
 
   function normalizeUrlKey(url) {
